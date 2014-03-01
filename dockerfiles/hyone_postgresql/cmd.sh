@@ -13,4 +13,4 @@ if [ "$(ls ${POSTGRES_DATADIR} | wc -l)" -eq 0 ]; then
   sleep 3
 fi
 
-exec /usr/bin/supervisord -n
+exec /usr/bin/monit -I

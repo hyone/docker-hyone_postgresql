@@ -21,7 +21,7 @@ RUN sed -i -e \
   "s/^#listen_addresses = 'localhost'/listen_addresses = '*'/" \
   /etc/postgresql/9.3/main/postgresql.conf
 ADD postgresql/pg_hba.conf /etc/postgresql/9.3/main/pg_hba.conf
-ADD supervisord/postgresql.conf /etc/supervisor/conf.d/postgresql.conf
+ADD monit/postgresql /etc/monit/conf.d/postgresql
 
 ENV POSTGRESQL_POSTGRES_PASSWORD V9CBTu4F
 
@@ -29,7 +29,7 @@ ENV POSTGRESQL_POSTGRES_PASSWORD V9CBTu4F
 
 ADD cmd.sh /usr/local/bin/cmd.sh
 RUN chown root:root /usr/local/bin/cmd.sh; \
-  chmod +x /usr/local/bin/cmd.sh
+    chmod +x /usr/local/bin/cmd.sh
 CMD ["/usr/local/bin/cmd.sh"]
 
 # VOLUME ["/var/lib/postgresql"]

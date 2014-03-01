@@ -10,10 +10,10 @@ end
 
 MyDockerRake::Tasks.new do |c|
   c.image = 'hyone/postgresql'
-  c.container = 'postgresql'
+  c.container = 'hyone.postgresql'
   c.data_image = 'hyone/postgresql-data'
-  c.data_container = 'postgresql-data'
-  c.ports = '-p 5432'
+  c.data_container = 'hyone.postgresql-data'
+  c.ports = '-p 22 -p 2812 -p 5432'
   unless has_image?(c.image)
     task('spec').prerequisites << 'docker:build'
   end
