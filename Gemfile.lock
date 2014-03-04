@@ -1,8 +1,8 @@
 GIT
-  remote: git://github.com/hyone/my_docker_raketasks.git
-  revision: 376c3b18a74a96cb06697d30cecf788328f03497
+  remote: git://github.com/hyone/my_docker_rake.git
+  revision: d94f4023e22d1412dcac3379336b5220f3f0cb42
   specs:
-    my_docker_raketasks (0.0.1)
+    my_docker_rake (0.0.3)
       rake
 
 GEM
@@ -39,6 +39,7 @@ PLATFORMS
 
 DEPENDENCIES
   docker-api
-  my_docker_raketasks!
+  my_docker_rake!
   rake
+  rspec
   serverspec
