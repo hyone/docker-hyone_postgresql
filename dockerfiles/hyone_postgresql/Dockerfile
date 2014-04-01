@@ -24,6 +24,10 @@ ADD postgresql/pg_hba.conf /etc/postgresql/9.3/main/pg_hba.conf
 ADD monit/postgresql /etc/monit/conf.d/postgresql
 
 ENV POSTGRESQL_POSTGRES_PASSWORD V9CBTu4F
+# set password for case of temporary usage (without persistent data container)
+RUN /etc/init.d/postgresql start ; \
+    echo "ALTER ROLE postgres WITH PASSWORD '${POSTGRESQL_POSTGRES_PASSWORD}'" | su postgres -c psql ; \
+    /etc/init.d/postgresql stop ; \
 
 ## Command
 
