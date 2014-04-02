@@ -9,12 +9,21 @@ RSpec::Core::RakeTask.new(:spec) do |t|
 end
 
 MyDockerRake::Tasks.new do |c|
-  c.image          = 'hyone/postgresql'
-  c.container      = 'hyone.postgresql'
-  c.data_image     = 'hyone/postgresql-data'
-  c.data_container = 'hyone.postgresql-data'
-  c.run_options    = '-p 22 -p 2812 -p 5432'
-  unless has_image?(c.image)
+  c.containers = [
+    {
+      name:  'hyone.postgresql-data',
+      image: 'hyone/postgresql-data',
+      protect_deletion: true
+    },
+    {
+      name:  'hyone.postgresql',
+      image: 'hyone/postgresql',
+      volumes_from: ['hyone.postgresql-data'],
+      ports: [22, 2812, 5432]
+    }
+  ]
+
+  unless c.containers.all? { |c| has_image?(c[:image]) }
     task('spec').prerequisites << 'docker:build'
   end
 end
