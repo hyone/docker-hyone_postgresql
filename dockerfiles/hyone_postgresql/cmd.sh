@@ -11,6 +11,8 @@ if [ "$(ls ${POSTGRES_DATADIR} | wc -l)" -eq 0 ]; then
   echo "ALTER ROLE postgres WITH PASSWORD '${POSTGRESQL_POSTGRES_PASSWORD}'" | su postgres -c psql
   /etc/init.d/postgresql stop
   sleep 3
+  echo 'Finish to set up database'
 fi
 
+echo 'Start to monit...'
 exec /usr/bin/monit -I
